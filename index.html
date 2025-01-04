@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive WebGL Interface</title>
+    <style>
+        /* Same styles as before, omitted here for brevity */
+    </style>
+</head>
+<body>
+
+    <!-- Apology Notification -->
+    <div id="apologyMessage" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, -50%); 
+    background-color:rgba(0, 0, 0, 0.8); color:white; padding:20px; border-radius:10px; z-index:999; text-align:center; width:80%; max-width:400px;">
+        <p>We sincerely apologize for the issue redirecting to Telegram. Please try again or contact support if the problem persists.</p>
+        <button onclick="closeApology()" style="background-color:var(--clr-cta); color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">Close</button>
+    </div>
+
+    <!-- The rest of the HTML structure remains unchanged -->
+    <div class="container" id="questionContainer">
+        <h2 id="questionText">Do you use Telegram?</h2>
+        <div class="radio-btn-group">
+            <input type="radio" name="telegram-option" value="yes" id="yes" />
+            <label for="yes" onclick="handleYes()">Yes</label>
+        </div>
+        <div class="radio-btn-group">
+            <input type="radio" name="telegram-option" value="no" id="no" />
+            <label for="no" onclick="handleNo()">No</label>
+        </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <div class="main-content" id="mainContent">
+        <h1>Welcome to the Adult 18+ Page</h1>
+        <a href="https://t.me/MidasRWA_bot/app?startapp=ref_25e58945-1ef1-4aa1-bb96-c0dd1d12841d" target="_blank">Click 18+ Link 1</a>
+        <a href="https://t.me/blum/app?startapp=ref_LsVxMHfqXc" target="_blank">Click 18+ Link 2</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/twgl.js"></script>
+    <script>
+        // Existing JavaScript logic remains the same, omitted here for brevity
+
+        // Function to handle 'Yes' click event
+        function handleYes() {
+            document.getElementById("questionContainer").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+            localStorage.setItem('telegramChoice', 'yes'); // Save the choice in localStorage
+            window.location.href = 'https://t.me/PAWSOG_bot/PAWS?startapp=WZWswyx2';
+        }
+
+        // Function to handle 'No' click event
+        function handleNo() {
+            document.getElementById("questionContainer").style.display = "none";
+            document.getElementById("mainContent").style.display = "block";
+            window.location.href = 'https://play.google.com/store/apps/details?id=org.telegram.messenger';
+            localStorage.setItem('telegramChoice', 'no');
+            setTimeout(function() {
+                document.getElementById("mainContent").style.display = "none";
+                document.getElementById("questionContainer").style.display = "block";
+                localStorage.removeItem('telegramChoice');
+            }, 1000); 
+        }
+
+        // Check for 'yes' redirection issue
+        window.onload = function() {
+            const choice = localStorage.getItem('telegramChoice');
+            if (choice === 'yes') {
+                document.getElementById("apologyMessage").style.display = "block";
+            }
+        };
+
+        // Close apology message
+        function closeApology() {
+            document.getElementById("apologyMessage").style.display = "none";
+            localStorage.removeItem('telegramChoice');
+        }
+    </script>
+
+</body>
+</html>
